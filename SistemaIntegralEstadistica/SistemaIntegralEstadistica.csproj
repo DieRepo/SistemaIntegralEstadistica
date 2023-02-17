@@ -93,7 +93,6 @@
     <Compile Include="Controlador\ModeloCampo.cs" />
     <Compile Include="Controlador\ModeloFila.cs" />
     <Compile Include="Controlador\ModeloTabla.cs" />
-    <Compile Include="Controlador\Tabla.cs" />
     <Compile Include="PaginaMaestra.Master.cs">
       <DependentUpon>PaginaMaestra.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

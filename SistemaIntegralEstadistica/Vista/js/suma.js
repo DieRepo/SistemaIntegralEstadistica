@@ -1,4 +1,4 @@
-﻿function sumarTotales(nombreClase) {
+﻿function sumarTotales(nombreClase, continuo) {
     var totalPorcentajeSimulacion = 0;
     try
     {
@@ -9,11 +9,13 @@
                 totalPorcentajeSimulacion += parseFloat($(this).val());
             }
         });
-        document.getElementById(nombreClase + "_Total").innerHTML = totalPorcentajeSimulacion;
+        var idTotal = "ContentPlaceHolder1_" + nombreClase+"_"+continuo + "_Total";
+        //document.getElementById(idTotal).innerHTML = totalPorcentajeSimulacion;
+        document.getElementById(idTotal).value = totalPorcentajeSimulacion;
         //document.getElementById('totalPorcentaje' + n).innerHTML = totalPorcentajeSimulacion;
-
-    }catch (Exception ) {
-        console.log("ERROR:");
+        console.log(""+totalPorcentajeSimulacion);
+    }catch (error ) {
+        console.log("ERROR:"+error.message);
     }
 
   
