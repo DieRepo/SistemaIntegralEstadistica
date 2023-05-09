@@ -22,7 +22,8 @@ namespace SistemaIntegralEstadistica.Vista.Mediacion
 
             if (!this.IsPostBack) {
 
-                consultarCentrosAsignados(infoUser["idArea"]);
+                //consultarCentrosAsignados(infoUser["idArea"]);
+                consultarCentrosAsignados("5");
             }
 
         }
@@ -86,6 +87,7 @@ namespace SistemaIntegralEstadistica.Vista.Mediacion
 
         protected void centroMed_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Cambiar los datos a la fecha o periodo deleccionado
 
         }
     }

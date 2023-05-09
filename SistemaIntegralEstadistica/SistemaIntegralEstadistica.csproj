@@ -130,7 +130,7 @@
     <Content Include="Vista\js\suma.js" />
     <Content Include="Vista\js\table.js" />
     <Content Include="Vista\Magistrados.aspx" />
-    <Content Include="Vista\Mediacion\Mediacion.aspx" />
+    <Content Include="Vista\Mediacion\ReporteMediacion.aspx" />
     <Content Include="Vista\Peritos.aspx" />
     <Content Include="Vista\SegAcuerdos.aspx" />
     <Content Include="Vista\SeguimientoAcuerdos.aspx" />
@@ -181,12 +181,12 @@
     <Compile Include="Vista\Magistrados.aspx.designer.cs">
       <DependentUpon>Magistrados.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Vista\Mediacion\Mediacion.aspx.cs">
-      <DependentUpon>Mediacion.aspx</DependentUpon>
+    <Compile Include="Vista\Mediacion\ReporteMediacion.aspx.cs">
+      <DependentUpon>ReporteMediacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Vista\Mediacion\Mediacion.aspx.designer.cs">
-      <DependentUpon>Mediacion.aspx</DependentUpon>
+    <Compile Include="Vista\Mediacion\ReporteMediacion.aspx.designer.cs">
+      <DependentUpon>ReporteMediacion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Peritos.aspx.cs">
       <DependentUpon>Peritos.aspx</DependentUpon>
