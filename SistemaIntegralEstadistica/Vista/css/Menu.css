@@ -1,0 +1,281 @@
+﻿@import "bourbon";
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600);
+
+body {
+    font-family: "Lato";
+    font-size: 100%;
+    overflow-y: scroll;
+    font-family: sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    background-color: #fefefe;
+}
+
+a :hover {
+    text-decoration: none;
+    transition: all 0.6s ease;
+}
+
+}
+
+.app {
+    height: 100vh;
+}
+/* -------------
+Sidebar
+----------------*/
+.sidebar {
+    position: absolute;
+    /*width: 33.3333%;*/
+    width: 17em;
+    height: 100%;
+    top: 0;
+    overflow: hidden;
+    background-color: #19222a;
+    -webkit-transform: translateZ(0);
+    visibility: visible;
+    -webkit-backface-visibility: hidden;
+}
+
+header {
+    background-color: #09f;
+    width: 100%;
+    display: block;
+    padding: 0.75em 1em;
+}
+
+
+
+/* -------------
+Sidebar Nav
+----------------*/
+.sidebar-nav {
+    position: fixed;
+    /*    //width: 13em;
+*/ background-color: #19222a;
+    height: 100%;
+    font-weight: 400;
+    font-size: 1.2em;
+    overflow: auto;
+    padding-bottom: 6em;
+    z-index: 9;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+    .sidebar-nav > ul {
+        list-style: none;
+        display: block;
+        padding: 0;
+        margin: 0;
+    }
+
+        .sidebar-nav > ul > li {
+            margin-left: 0;
+            padding-left: 0;
+            /*//min-width: 13em;*/
+            display: inline-block;
+            width: 100%;
+        }
+
+            .sidebar-nav > ul > li > a { /*Texto de menu*/
+                color: rgba(255,255,255,0.9) !important;
+                font-size: 0.75em !important;
+                padding: 1.05em 1em !important;
+                position: relative !important;
+                display: block !important;
+            }
+
+                .sidebar-nav > ul > li > a:hover {
+                    background-color: deeppink;
+                    /*@include transition(all 0.6s ease);*/
+                }
+
+
+
+/* -------------
+Sidebar: icons
+----------------*/
+i {
+    font-size: 1.8em;
+    padding-right: 0.5em;
+    width: 9em;
+    display: inline;
+    vertical-align: middle;
+}
+
+
+
+/* -------------
+Chev elements
+----------------*/
+.sidebar-nav > ul > li > ul > li > a:after {
+    content: '\f125';
+    font-family: ionicons;
+    font-size: 0.5em;
+    width: 10px;
+    color: #fff;
+    position: absolute;
+    right: 0.75em;
+    top: 45%;
+}
+/* -------------
+Nav-Flyout
+----------------*/
+.nav-flyout {
+    position: absolute;
+    background-color: pink;
+    z-index: 9;
+    left: 2.5em;
+    top: 0;
+    height: 100vh;
+    transform: translateX(100%);
+    transition: all 0.5s ease;
+}
+
+    .nav-flyout a :hover {
+        background-color: red;
+    }
+
+/* -------------
+Hover
+----------------*/
+
+ul > li :hover > .nav-flyout {
+    transform: translateX(0);
+    transition: all 0.5s ease;
+}
+
+.Contenido {
+    width: 100%;
+}
+
+#mascara, .mascara1 {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 1001;
+    background-color: rgba(0, 0, 0, 0.69);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.barra_opciones {
+    background-color: #B03737;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.div_emergente {
+    width: 40%;
+    height: auto;
+    background-color: white;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    border-radius: 5px;
+}
+
+.table-dark td, .table-dark th, .table-dark thead th {
+    border-color: white;
+}
+
+.table-dark {
+    font-size: 0.9em;
+}
+
+.login_contenedor {
+    background: -webkit-linear-gradient(-135deg, #9d2424, #c80000);
+    background: -o-linear-gradient(-135deg, #9d2424, #c80000);
+    background: -moz-linear-gradient(-135deg, #9d2424, #c80000);
+    background: linear-gradient(-135deg, #9d2424, #c80000);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+}
+
+.central_panel {
+    background-color: #FFF;
+    width: 800px;
+    border-radius: 10px;
+}
+
+.titulo_central_panel {
+    font-size: 30px;
+}
+
+.titulo_login_panel {
+    font-size: 20px;
+    font-variant: small-caps;
+}
+
+#header {
+    background-color: #941822 !important;
+}
+
+.navbar {
+    background-color: #941822 !important;
+}
+
+#ImageLogo {
+    float: right !important;
+}
+
+#content {
+    min-height: 900px;
+}
+
+#footer {
+    width: 100%;
+    height: 90px;
+    background-color: #941822 !important;
+}
+
+.navbar-light .navbar-brand {
+    color: white !important;
+}
+
+#menu a.level1 {
+    color: white !important;
+}
+
+
+
+
+
+.level2 > li > a {
+    color: black !important;
+}
+
+#menu a.popout {
+    background-image: none !important;
+}
+
+.level2 > li > a {
+    display: block;
+    width: 100%;
+    padding: 0.25rem 1rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+}
+
+    .level2 > li > a:hover {
+        color: #1e2125;
+        background-color: #e9ecef;
+    }

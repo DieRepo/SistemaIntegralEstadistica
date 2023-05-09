@@ -1,0 +1,38 @@
+﻿.classHeader {
+    background-color: #b71c1c;
+    color: white;
+}
+
+.table td, .table th {
+    vertical-align: middle !important;
+}
+
+#botones-left > .btn > .fa{
+display:  contents!important;
+
+}
+
+#header > .row {
+    margin-right: 0px!important;
+    margin-left: 0px!important;
+}
+
+.btn-orange {
+    background-color: #ef6c00 !important;
+    border-color: #ef6c00 !important;
+}
+
+.fijar-r1{
+    position: sticky;
+    top: 0;
+}
+
+.fijar-r2 {
+    position: sticky;
+    top: 50px;
+}
+
+.fijar-col1 {
+    position: sticky;
+    left: 0;
+}

@@ -1,0 +1,150 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Master1.master.cs" Inherits="SistemaIntegralEstadistica.Master1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="stylesheet" href="Vista/css/sie.css" />
+    <link rel="stylesheet" href="Vista/css/Menu.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="../Vista/js/jquery-3.6.0.min.js"></script>
+<%--    <script src="../Vista/js/table.js"></script>--%>
+    <script src="../Vista/js/suma.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+       <form id="form1" runat="server">
+          <div id="header">
+
+
+            <div class="row align-items-center">
+
+                <div class="col">
+                    <asp:Image id="ImageLogo" runat="server" Height="59px" ImageUrl="~/Img/Logo_200x60.png" 
+                        Width="190px" AlternateText="Imagen no disponible" ImageAlign="TextTop" />
+                   
+                </div>
+
+                <div class="col">
+                </div>
+                <asp:Panel runat="server" class="col" Visible="false">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light" >
+                        <asp:Panel runat="server" class="container-fluid">
+
+                            <asp:LinkButton runat="server" class="navbar-brand"  CausesValidation="false">Inicio</asp:LinkButton>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <asp:Menu ID="menu" class="collapse navbar-collapse" runat="server"
+                                Orientation="Horizontal" Width="90%" Visible="false">
+                                <LevelMenuItemStyles>
+                                    <asp:MenuItemStyle CssClass="navbar-nav" />
+                                </LevelMenuItemStyles>
+                                <LevelSubMenuStyles>
+                                    <asp:SubMenuStyle CssClass="nav-item dropdown" />
+                                    <asp:SubMenuStyle CssClass="dropdown-menu" />
+                                    <asp:SubMenuStyle CssClass="dropdown-item" >
+                                    </asp:SubMenuStyle>
+                                </LevelSubMenuStyles>
+                            </asp:Menu>
+                        </asp:Panel>
+                    </nav>
+
+                </asp:Panel>
+                <div class="col">
+                    
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+
+
+        <div id="body_page">
+            <div style="max-width: 90%!important; margin: 0 auto!important;">
+                <br/>
+            <div class="container" style="max-width:100%!important;">
+                <div class="row">
+
+                    <%--      Información de Usuario--%>
+                    <div class="col col-4" style="text-align:left;">
+                        <div class="card" style="width: auto;">
+                            <div class="card-body">
+                                <h5 runat="server" ID="usuario" class="card-title">Título de la tarjeta</h5>
+                                <asp:Label runat="server" ID="areaAdscripcion" class="card-subtitle mb-2 text-muted">Subtítulo</asp:Label>
+                                <p class="card-text" hidden="hidden">Contenido de la tarjeta</p>
+                                <a href="#" class="card-link" hidden="hidden">Enlace 1</a>
+                                <a href="#" class="card-link" hidden="hidden">Enlace 2</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <%--Información del año de consulta--%>
+                    <div class="col col-4" style="text-align:center;">
+                        <asp:Label runat="server" Text="Año: "></asp:Label>
+                            <asp:DropDownList runat="server" ID="AnioConsulta"  class="form-control" aria-labelledby="dropdownMenuButton"
+                                style="width: 40%!important;display:initial;">
+                                <asp:ListItem Text="2023" class="dropdown-item" ></asp:ListItem>
+                                <asp:ListItem Text="2024" Enabled="false" class="dropdown-item" ></asp:ListItem>
+                                <asp:ListItem Text="2025" Enabled="false" class="dropdown-item" ></asp:ListItem>
+                            </asp:DropDownList>
+                    </div>
+
+                    <%--Información de descarga y cierre--%>
+                    <div id="botones-left" class="col col-4" style="text-align:end;">
+                        <asp:Button ID="ButtonDownload" Visible="false" runat="server" Text="<i class='fa fa-download' aria-hidden='true' ></i> " class="btn btn-secondary"/>
+
+                        <asp:LinkButton runat="server" id="btnRun2" class="btn btn-info btn-orange" title="Descargar excel"  >
+                            <i class="fa fa-download fa-2x" aria-hidden="true" ></i> 
+                        </asp:LinkButton>
+
+                         <asp:LinkButton runat="server" ID="LinkButton1" title="Cerrar sesión" Text="Cerrar sesión"
+                        Font-Size="20px" CausesValidation="false" Visible="true" Style="font-size: 16px;" class="btn btn-dark ">
+                            <i class="fa fa-sign-out fa-2x" aria-hidden="true" ></i> 
+                        </asp:LinkButton>
+                    </div>
+                </div>
+            </div>
+
+
+            <asp:ContentPlaceHolder ID="Panel1" runat="server">
+               
+            </asp:ContentPlaceHolder>
+
+            <!-- >     <-->
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+
+            </asp:ContentPlaceHolder>
+        </div>
+            </div>
+    </form>
+    <br/><br/>
+
+
+
+
+
+
+    <footer id="footer" class="footer-1">
+        <div class="footer-copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <br />
+                        <p style="color:white;">Poder Judicial del Estado de México, Nicolas Bravo Nte. 201, Colonia Centro, Toluca, México. Tel. (722) 167-92-00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+</footer>
+
+</body>
+</html>

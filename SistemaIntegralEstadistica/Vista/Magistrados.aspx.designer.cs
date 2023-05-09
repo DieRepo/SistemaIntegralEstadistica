@@ -7,119 +7,124 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace SistemaIntegralEstadistica
+namespace SistemaIntegralEstadistica.Vista
 {
 
 
-    public partial class PaginaMaestra
+    public partial class Magistrados
     {
 
         /// <summary>
-        /// Control head.
+        /// Control contenido_tabla_visitas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
+        protected global::System.Web.UI.WebControls.Panel contenido_tabla_visitas;
 
         /// <summary>
-        /// Control form1.
+        /// Control Table1111.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.WebControls.Table Table1111;
 
         /// <summary>
-        /// Control ImageLogo.
+        /// Control Button3.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image ImageLogo;
+        protected global::System.Web.UI.WebControls.Button Button3;
 
         /// <summary>
-        /// Control menu.
+        /// Control ScriptManager1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Menu menu;
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
-        /// Control usuario.
+        /// Control UpdatePanel1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl usuario;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
 
         /// <summary>
-        /// Control areaAdscripcion.
+        /// Control Tabla178.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label areaAdscripcion;
+        protected global::System.Web.UI.WebControls.Table Tabla178;
 
         /// <summary>
-        /// Control AnioConsulta.
+        /// Control Button4.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList AnioConsulta;
+        protected global::System.Web.UI.WebControls.Button Button4;
 
         /// <summary>
-        /// Control ButtonDownload.
+        /// Control Tabla2123.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonDownload;
+        protected global::System.Web.UI.WebControls.Table Tabla2123;
 
         /// <summary>
-        /// Control btnRun2.
+        /// Control Button1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnRun2;
+        protected global::System.Web.UI.WebControls.Button Button1;
 
         /// <summary>
-        /// Control LinkButton1.
+        /// Control Tabla3456.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+        protected global::System.Web.UI.WebControls.Table Tabla3456;
 
         /// <summary>
-        /// Control Panel1.
+        /// Control Button2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder Panel1;
+        protected global::System.Web.UI.WebControls.Button Button2;
 
         /// <summary>
-        /// Control ContentPlaceHolder1.
+        /// Propiedad Master.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Propiedad generada automáticamente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolder1;
+        public new SistemaIntegralEstadistica.PaginaMaestra Master
+        {
+            get
+            {
+                return ((SistemaIntegralEstadistica.PaginaMaestra)(base.Master));
+            }
+        }
     }
 }

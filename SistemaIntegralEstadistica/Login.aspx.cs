@@ -9,10 +9,8 @@ namespace SistemaIntegralEstadistica
     public partial class Login : System.Web.UI.Page
     {
 
-        string str;
         MySqlCommand com;
         MySqlDataReader r;
-        string passw;
         protected void Page_Load(object sender, EventArgs e)
         {
             textoError.Visible = false;
@@ -20,14 +18,22 @@ namespace SistemaIntegralEstadistica
 
         protected void btn_login_Click(object sender, EventArgs e)
         {
+            string str;
+            string passw;
+
+            Session["verTabla"] = null;
+            Session["usuario"] = null;
+
             MySqlConnection con = null;
+
             try
             {
-
                 con = new MySqlConnection(System.Configuration.ConfigurationManager.AppSettings["local"]);
                 con.Open();
-                str = "SELECT * FROM tblusuarios " +
-                    "  where usuario=@UserName and pas=@Password and activo = 1 ";
+                str = "SELECT * FROM tblusuarios a " +
+                    " LEFT JOIN tblpermisostablas b ON a.idusuarios = b.idusuarios" +
+                    " LEFT JOIN tblcatareas c ON a.idArea = c.id " +
+                    " where a.usuario=@UserName and a.pas=@Password and a.idusuarios = b.idusuarios and a.activo = 1 AND b.activo=1; ";
                 com = new MySqlCommand(str, con);
                 com.CommandType = CommandType.Text;
                 passw = TextBox_password.Text;
@@ -41,26 +47,45 @@ namespace SistemaIntegralEstadistica
 
                 if (r.HasRows)
                 {
-                  
+
                     string id = "";
                     string nombre = "";
-                   
+                    int idpermisostablas = 0;
+                    String idArea = "", nombreArea="";
+
+                    List<int> idtablas = new List<int>();
 
                     while (r.Read())
                     {
                         id = r.GetString("idusuarios");
-                        nombre = r.GetString("nombre");
-                        
+                        nombre = r.GetString("nombre").Trim() + " "+ r.GetString("primerApellido").Trim() + " " + r.GetString("segundoApellido").Trim();
+                        idpermisostablas = r.GetInt32("idtablacceso");
+                        idtablas.Add(idpermisostablas);
+                        idArea = r.GetString("idArea");
+                        nombreArea = r.GetString("nombreArea");
                     }
+
+                    Session["verTabla"] = idtablas;
+                    //var vertablas = Session["verTabla"];
                     Dictionary<String, String> uss = new Dictionary<String, String>();
                     Random rnd = new Random();
                     uss.Add("user", TextBox_user_name.Text);
                     uss.Add("pass", passw);
                     uss.Add("idusuarios", id);
                     uss.Add("nombre", nombre);
-                    Session["usuario"] = uss;
+                    uss.Add("area", idArea);
+                    uss.Add("nombreArea", nombreArea);
 
-                  /*  Response.Redirect("~/Vista/SegAcuerdos.aspx");*/
+                    Session["usuario"] = uss;
+                    
+                    if (id.Equals(-1))
+                    {
+                        Response.Redirect("~/Mediacion/Mediacion.aspx");
+                    }
+                    else {
+                        Response.Redirect("~/Vista/Inicio.aspx");
+                    }
+
                     textoError.Text = "Usuario correcto";
                     textoError.Visible = true;
 
@@ -94,5 +119,9 @@ namespace SistemaIntegralEstadistica
             }
 
         }
+
+
+
+
     }
 }

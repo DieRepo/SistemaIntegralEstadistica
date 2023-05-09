@@ -11,7 +11,7 @@ namespace SistemaIntegralEstadistica
 {
 
 
-    public partial class PaginaMaestra
+    public partial class Master1
     {
 
         /// <summary>
