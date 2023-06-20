@@ -13,6 +13,10 @@ namespace SistemaIntegralEstadistica.Controlador
         private Boolean esFilaActiva;
         private String claseSuma;
         private String claseTotal;
+        private String claseResta;
+        private String claseRestaTotal;
+        private bool tieneSuma;
+        private bool tieneResta;
 
 
         public int IdFila { get => idFila; set => idFila = value; }
@@ -21,5 +25,9 @@ namespace SistemaIntegralEstadistica.Controlador
         public bool EsFilaActiva { get => esFilaActiva; set => esFilaActiva = value; }
         public string ClaseSuma { get => claseSuma; set => claseSuma = value; }
         public string ClaseTotal { get => claseTotal; set => claseTotal = value; }
+        public string ClaseResta { get => claseResta; set => claseResta = value; }
+        public string ClaseRestaTotal { get => claseRestaTotal; set => claseRestaTotal = value; }
+        public bool TieneSuma { get => tieneSuma; set => tieneSuma = value; }
+        public bool TieneResta { get => tieneResta; set => tieneResta = value; }
     }
 }

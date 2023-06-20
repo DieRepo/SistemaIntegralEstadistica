@@ -7,12 +7,21 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace SistemaIntegralEstadistica.Vista.UnidadIgualdad
+namespace SistemaIntegralEstadistica.Vista
 {
 
 
-    public partial class IgualdadCaptura
+    public partial class CuidadMujeres
     {
+
+        /// <summary>
+        /// Control ScriptManager1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
 
         /// <summary>
         /// Control panelCiudadMujeres.
@@ -24,40 +33,40 @@ namespace SistemaIntegralEstadistica.Vista.UnidadIgualdad
         protected global::System.Web.UI.WebControls.Panel panelCiudadMujeres;
 
         /// <summary>
-        /// Control panelMediacion.
+        /// Control panelUnidadIgualdad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelMediacion;
+        protected global::System.Web.UI.WebControls.Panel panelUnidadIgualdad;
 
         /// <summary>
-        /// Control contentMediacion.
+        /// Control updatePanelRegistro.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel contentMediacion;
+        protected global::System.Web.UI.UpdatePanel updatePanelRegistro;
 
         /// <summary>
-        /// Control panelUnidadTransparencia.
+        /// Control listaDatos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelUnidadTransparencia;
+        protected global::System.Web.UI.WebControls.GridView listaDatos;
 
         /// <summary>
-        /// Control ScriptManager1.
+        /// Control panelConsultaPeriodoDerechosHumanos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        protected global::System.Web.UI.WebControls.Panel panelConsultaPeriodoDerechosHumanos;
 
         /// <summary>
         /// Control periodoInicio.
@@ -105,13 +114,31 @@ namespace SistemaIntegralEstadistica.Vista.UnidadIgualdad
         protected global::System.Web.UI.WebControls.DataList listaDHUT;
 
         /// <summary>
-        /// Control exampleModalCenter.
+        /// Control UpdatePanelCM.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel exampleModalCenter;
+        protected global::System.Web.UI.UpdatePanel UpdatePanelCM;
+
+        /// <summary>
+        /// Control myModal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel myModal;
+
+        /// <summary>
+        /// Control exampleModalCenterTitle.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label exampleModalCenterTitle;
 
         /// <summary>
         /// Control fechaRegistro.
@@ -159,24 +186,6 @@ namespace SistemaIntegralEstadistica.Vista.UnidadIgualdad
         protected global::System.Web.UI.WebControls.Button botonGuardar;
 
         /// <summary>
-        /// Control registroInformacion.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel registroInformacion;
-
-        /// <summary>
-        /// Control listaDatos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView listaDatos;
-
-        /// <summary>
         /// Control panelAyC.
         /// </summary>
         /// <remarks>
@@ -193,6 +202,60 @@ namespace SistemaIntegralEstadistica.Vista.UnidadIgualdad
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel contenidoAyC;
+
+        /// <summary>
+        /// Control updatePanel2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updatePanel2;
+
+        /// <summary>
+        /// Control listaAtencion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView listaAtencion;
+
+        /// <summary>
+        /// Control tablaAtencionCiudadana.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView tablaAtencionCiudadana;
+
+        /// <summary>
+        /// Control UpdatePanel1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+
+        /// <summary>
+        /// Control myModalAyC.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel myModalAyC;
+
+        /// <summary>
+        /// Control Label1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
 
         /// <summary>
         /// Control fechaAC.
@@ -240,57 +303,39 @@ namespace SistemaIntegralEstadistica.Vista.UnidadIgualdad
         protected global::System.Web.UI.WebControls.TextBox segundoApellido;
 
         /// <summary>
-        /// Control ButtonAC.
+        /// Control Button1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonAC;
+        protected global::System.Web.UI.WebControls.Button Button1;
 
         /// <summary>
-        /// Control tablaAtencionCiudadana.
+        /// Control panelParentalidad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView tablaAtencionCiudadana;
+        protected global::System.Web.UI.WebControls.Panel panelParentalidad;
 
         /// <summary>
-        /// Control panelAtencionCiudadana.
+        /// Control contentParentalidad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelAtencionCiudadana;
+        protected global::System.Web.UI.WebControls.Panel contentParentalidad;
 
         /// <summary>
-        /// Control contentAtencionCiudadana.
+        /// Control updatePatentalidad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel contentAtencionCiudadana;
-
-        /// <summary>
-        /// Control panelCoordinacionPar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel panelCoordinacionPar;
-
-        /// <summary>
-        /// Control contentCoordinacionPar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel contentCoordinacionPar;
+        protected global::System.Web.UI.UpdatePanel updatePatentalidad;
     }
 }

@@ -32,7 +32,7 @@
                     </asp:Panel>
                     <asp:Panel runat="server" CssClass="row m-0">
                         <asp:Panel runat="server" CssClass="col-sm-6 p-3 d-flex align-items-center justify-content-center">
-                           <%-- --%> <asp:Image runat="server" ImageUrl="Img/pjem.png" /> 
+                           <%-- --%> <asp:Image runat="server" ImageUrl="~/Vista/Img/pjem.png" /> 
                         </asp:Panel>
                         <asp:Panel runat="server" CssClass="col-sm-6 p-3">
                             <asp:Panel runat="server" CssClass="d-flex align-items-center justify-content-center">

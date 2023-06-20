@@ -4,4 +4,16 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="Panel1" runat="server">
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <asp:Menu runat="server" ID="MenuHojas">
+        <LevelMenuItemStyles>
+        <asp:MenuItemStyle CssClass="main_menu00" />
+        <asp:MenuItemStyle CssClass="level_menu" />
+    </LevelMenuItemStyles>
+        <Items>
+            <asp:MenuItem Text="UNO"></asp:MenuItem>
+            <asp:MenuItem Text="DOS"></asp:MenuItem>
+        </Items>
+    </asp:Menu>
+
+
 </asp:Content>

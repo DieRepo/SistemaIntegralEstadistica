@@ -26,7 +26,7 @@
             <div class="row align-items-center">
 
                 <div class="col">
-                    <asp:Image id="ImageLogo" runat="server" Height="59px" ImageUrl="~/Img/Logo_200x60.png" 
+                    <asp:Image id="ImageLogo" runat="server" Height="59px" ImageUrl="~/Vista/Img/Logo_200x60.png" 
                         Width="190px" AlternateText="Imagen no disponible" ImageAlign="TextTop" />
                    
                 </div>
@@ -121,9 +121,16 @@
             </asp:ContentPlaceHolder>
 
             <!-- >     <-->
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                <asp:ScriptManager ID="ScriptManager1" runat="server" />
 
-            </asp:ContentPlaceHolder>
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                    <ContentTemplate>
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+
+
         </div>
             </div>
     </form>

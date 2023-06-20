@@ -26,6 +26,39 @@ function sumarTotales(nombreClase) {
 }
 
 
+function restarTotales(nombreClases , claseTotal) {
+    var totalResta = 0;
+    try {
+        var arrayClases = nombreClases.split(",");
+        for (var i = 0; i < arrayClases.length; i++) {
+            if (i == 0) {
+                $("." + arrayClases[i]).each(function () {
+                    if (isNaN(parseInt($(this).val()))) {
+                        totalResta = totalResta - 0;
+                    } else {
+                        totalResta = parseFloat($(this).val());
+                    }
+                });
+            } else {
+                $("." + arrayClases[i]).each(function () {
+                    if (isNaN(parseInt($(this).val()))) {
+                        totalResta = totalResta - 0;
+                    } else {
+                        totalResta = totalResta - parseFloat($(this).val());
+                    }
+                });
+            }
+
+        }
+        //var nombreTotal = id;
+        document.getElementsByClassName(claseTotal)[0].value = totalResta;
+    } catch (error) {
+        //console.log("ERROR:"+error.message);
+    }
+
+}
+
+
 function sumarTotalesGeneral(clases, id) {
     var granTotal = 0;
 
@@ -46,6 +79,30 @@ function sumarTotalesGeneral(clases, id) {
         
     } catch (error) {
         Console.log("ERROR:"+error.message);
+    }
+
+}
+
+function restarTotalesGeneral(clases, id) {
+    var granTotal = 0;
+
+    try {
+        var arrayClases = clases.split(",");
+        for (var i = 0; i < arrayClases.length; i++) {
+            $("." + arrayClases[i]).each(function () {
+                if (isNaN(parseInt($(this).val()))) {
+                    granTotal += 0;
+                } else {
+                    granTotal -= parseFloat($(this).val());
+                }
+            });
+        }
+
+        var nombreTotal = id;
+        document.getElementsByClassName(nombreTotal)[0].value = granTotal;
+
+    } catch (error) {
+        Console.log("ERROR:" + error.message);
     }
 
 }

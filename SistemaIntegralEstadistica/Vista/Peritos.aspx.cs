@@ -33,6 +33,14 @@ namespace SistemaIntegralEstadistica.Vista
         Dictionary<int, ModeloInicio> infoTabla;
 
 
+
+        protected void btnSubmit_Click_p(object sender, EventArgs e)
+        {
+            /*lblMessage.Text = String.Format("Hi {0}, welcome!", txtName.Text);
+            txtName.Visible = false;
+            btnSubmitP.Visible = false;*/
+        }
+
         protected override void OnInit(EventArgs e)
         {
             //CargarControles();
@@ -1144,5 +1152,9 @@ namespace SistemaIntegralEstadistica.Vista
 
     }
 
-    
+
+
+   
+
+
 }

@@ -101,6 +101,7 @@
     <Content Include="css\font-awesome.css" />
     <Content Include="css\font-awesome.min.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="Vista\CuidadMujeres.aspx" />
     <Content Include="Vista\Img\cerrar.png" />
     <Content Include="Vista\Img\close.png" />
     <Content Include="Vista\Img\Logo_200x60.png" />
@@ -154,6 +155,7 @@
     </Compile>
     <Compile Include="Modelo\ModeloCampo.cs" />
     <Compile Include="Modelo\ModeloCatalogo.cs" />
+    <Compile Include="Modelo\ModeloHoja.cs" />
     <Compile Include="Modelo\ModeloRangoCelda.cs" />
     <Compile Include="Modelo\ModeloFila.cs" />
     <Compile Include="Modelo\ModeloInicio.cs" />
@@ -167,6 +169,13 @@
       <DependentUpon>PaginaMaestra.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vista\CuidadMujeres.aspx.cs">
+      <DependentUpon>CuidadMujeres.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vista\CuidadMujeres.aspx.designer.cs">
+      <DependentUpon>CuidadMujeres.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Vista\Inicio.aspx.cs">
       <DependentUpon>Inicio.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

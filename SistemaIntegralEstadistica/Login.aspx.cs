@@ -1,4 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
+using SistemaIntegralEstadistica.Controlador;
+using SistemaIntegralEstadistica.Modelo;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -26,14 +28,18 @@ namespace SistemaIntegralEstadistica
 
             MySqlConnection con = null;
 
+            Dictionary<int , ModeloHoja > hojas = new Dictionary<int, ModeloHoja>();
+
             try
             {
                 con = new MySqlConnection(System.Configuration.ConfigurationManager.AppSettings["local"]);
                 con.Open();
                 str = "SELECT * FROM tblusuarios a " +
                     " LEFT JOIN tblpermisostablas b ON a.idusuarios = b.idusuarios" +
+                    " LEFT JOIN tbltabla t ON b.idtablacceso = t.id "+
                     " LEFT JOIN tblcatareas c ON a.idArea = c.id " +
-                    " where a.usuario=@UserName and a.pas=@Password and a.idusuarios = b.idusuarios and a.activo = 1 AND b.activo=1; ";
+                    " LEFT JOIN tbltablahoja h ON t.idHoja = h.id " +
+                    " where a.usuario=@UserName and a.pas=@Password and a.idusuarios = b.idusuarios and a.activo = 1 AND b.activo=1 ORDER BY t.orden; ";
                 com = new MySqlCommand(str, con);
                 com.CommandType = CommandType.Text;
                 passw = TextBox_password.Text;
@@ -59,12 +65,53 @@ namespace SistemaIntegralEstadistica
                     {
                         id = r.GetString("idusuarios");
                         nombre = r.GetString("nombre").Trim() + " "+ r.GetString("primerApellido").Trim() + " " + r.GetString("segundoApellido").Trim();
-                        idpermisostablas = r.GetInt32("idtablacceso");
-                        idtablas.Add(idpermisostablas);
+                      
+                        
                         idArea = r.GetString("idArea");
                         nombreArea = r.GetString("nombreArea");
-                    }
 
+                        idpermisostablas = r.GetInt32("idtablacceso");
+
+                        int idHoja = r.GetInt32("idHoja");
+
+                        ModeloHoja value;
+                        bool hasValue = hojas.TryGetValue(idHoja, out value);
+                        if (idHoja > 0) {
+                            if (hasValue)
+                            {
+                                ModeloHoja val = hojas[idHoja];
+                                ModeloTabla tab = new ModeloTabla();
+                                tab.Id = idpermisostablas;
+                                if (val.Tablas == null)
+                                {
+                                    val.Tablas = new List<ModeloTabla>();
+                                    val.Tablas.Add(tab);
+                                }
+                                else
+                                {
+                                    val.Tablas.Add(tab);
+                                }
+                            }
+                            else
+                            {
+                                ModeloHoja hoja = new ModeloHoja();
+                                hoja.IdHoja = r.GetInt32("idHoja");
+                                hoja.NombreHoja = r.GetString("descripcion");
+                                hoja.Orden = r.GetInt32("ordenHoja");
+                                //ModeloHoja val = hojas[idHoja];
+                                List<ModeloTabla> lista = new List<ModeloTabla>();
+                                ModeloTabla tab = new ModeloTabla();
+                                tab.Id = idpermisostablas;
+                                hoja.Tablas = new List<ModeloTabla>();
+                                hoja.Tablas.Add(tab);
+                                hojas.Add(idHoja, hoja);
+                            }
+                        }
+
+
+                        idtablas.Add(idpermisostablas);
+                    }
+                    Session["verHojas"] = hojas;
                     Session["verTabla"] = idtablas;
                     //var vertablas = Session["verTabla"];
                     Dictionary<String, String> uss = new Dictionary<String, String>();
@@ -75,6 +122,7 @@ namespace SistemaIntegralEstadistica
                     uss.Add("nombre", nombre);
                     uss.Add("area", idArea);
                     uss.Add("nombreArea", nombreArea);
+                    //uss.Add("hojas", hojas.ToString());
 
                     Session["usuario"] = uss;
                     

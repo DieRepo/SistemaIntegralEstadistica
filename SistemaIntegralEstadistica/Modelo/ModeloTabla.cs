@@ -29,6 +29,7 @@ namespace SistemaIntegralEstadistica.Controlador
         private String parametro;
         private Boolean mesActualValidado;
         private Boolean tieneFilaTrimestre;
+         
 
         public int Id { get => id; set => id = value; }
         public string NombreTabla { get => nombreTabla; set => nombreTabla = value; }

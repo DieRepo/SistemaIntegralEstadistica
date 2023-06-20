@@ -24,7 +24,7 @@ namespace SistemaIntegralEstadistica
         String sql;
         Dictionary<string, string> d;
         Dictionary<string, ModeloTabla> t;
-        int[] catalogos = { 1, 2 };
+        int[] catalogos = { 1, 2 , 3};
         int[] celdaInicioTabla = { 4, 2 };
         int espacioTablas = 2;
         int anio = 2023;
@@ -53,7 +53,7 @@ namespace SistemaIntegralEstadistica
                 cargarDatosCatalogos();
                 Session["tablasAcceso"] = (List<int>)Session["verTabla"];
             }
-            
+
             GeneraControlesDinamicos();
             agregarInformacionUusuario();
         }
@@ -76,6 +76,23 @@ namespace SistemaIntegralEstadistica
             {
 
                 Console.WriteLine("Error al generar los controles dinamicos "+ error.ToString());
+            }
+
+        }
+
+        public void GeneraControlesDinamicosPorHoja(Dictionary<int, ModeloHoja> listaHojas)
+        {
+            try
+            {
+                //Generar controles dinámicos
+                listaTablas = cargarControlesTablas();
+                obtenerDatosTablas();
+                CargarControles();
+            }
+            catch (Exception error)
+            {
+
+                Console.WriteLine("Error al generar los controles dinamicos " + error.ToString());
             }
 
         }
@@ -233,13 +250,13 @@ namespace SistemaIntegralEstadistica
                         botonGuardar.CommandName = "Tabla" + (tablasAcceso[i]) + "_mes";
                         botonGuardar.UseSubmitBehavior = false;
                         botonGuardar.OnClientClick = "this.disabled = true; this.value = 'Guardando...'; ";
+                        botonGuardar.UseSubmitBehavior = false;
                         if (tabla["Tabla" + tablasAcceso[i]].EsRegistro)
                         {
                             botonGuardar.Command += new CommandEventHandler(ejemplo_Click2);
                         }
                         else {
                             botonGuardar.Command += new CommandEventHandler(ejemplo_Click);
-
                         }
                         // ContentPlaceHolder1.Controls.Add(botonGuardar);
                     }
@@ -326,13 +343,130 @@ namespace SistemaIntegralEstadistica
             int mes = fecha.Month;
             Dictionary<String, ModeloTabla> tabla = (Dictionary<string, ModeloTabla>)Session["infoTablas"];
             tablasAcceso = (List<int>)Session["tablasAcceso"];
+            Boolean esPrimero = true;
 
+            Dictionary<int, ModeloHoja> listaHojas = (Dictionary<int, ModeloHoja>)Session["verHojas"];
 
-            for (int i = 0; i < tablasAcceso.Count ; i++)
-            {
-                generarTablaDinamica0(listaTablas[i], listaBotones[i], listaBotonesValidar[i], tabla["Tabla"+tablasAcceso[i]]);
+            int contador = 0;
+            if (listaHojas.Count > 2) {
+
+                Menu menu = new Menu();
+                menu.ID = "pills-tab";
+                menu.Orientation = Orientation.Horizontal;
+                menu.ClientIDMode = System.Web.UI.ClientIDMode.Static;
+                //menu.Attributes.Add("class", "nav nav-pills mb-3");
+                //menu.Attributes.Add("role", "tablist");
+
+                //new  MenuItemStyleCollection listStyle = MenuItemStyle ;
+                MenuItemStyle mistyle = new MenuItemStyle();
+                mistyle.CssClass= "nav-item";
+
+                //listStyle.Add(mistyle);
+                menu.LevelMenuItemStyles.Add(mistyle);
+                menu.LevelMenuItemStyles.Add(mistyle);
+                foreach (var item in listaHojas)
+                {
+                    MenuItem itemInfo = new MenuItem();
+                    itemInfo.Text = item.Value.NombreHoja;
+                    menu.Items.Add(itemInfo);
+
+                    foreach (var tablaTemp in item.Value.Tablas)
+                    {
+                        //panelPane = generarTablaDinamica0(listaTablas[contador], listaBotones[contador], listaBotonesValidar[contador], tabla["Tabla" + tablasAcceso[contador]], true, panelPane);
+                        //panelTab.Controls.Add(panelPane);
+                        contador++;
+                    }
+                }
+                ContentPlaceHolder1.Controls.Add(menu);
+                //panelCol1.Controls.Add(panelNav);
+
+                //ContentPlaceHolder1.Controls.Add(panelRow);
 
             }
+            else if (listaHojas.Count > 1)
+            {
+
+                Panel panelRow = new Panel();
+                panelRow.Attributes.Add("class", "row");
+                Panel panelCol1 = new Panel();
+                panelCol1.Attributes.Add("class", "col-2");
+                    Panel panelNav = new Panel();
+                    panelNav.Attributes.Add("class", "nav flex-column nav-pills");
+                    panelNav.Attributes.Add("id", "v-pills-tab");
+                    panelNav.Attributes.Add("role", "tablist");
+                    panelNav.Attributes.Add("aria-orientation", "horizontal");
+
+                Panel panelCol2 = new Panel();
+                panelCol2.Attributes.Add("class", "col-10");
+                    Panel panelTab = new Panel();
+                    panelTab.Attributes.Add("class", "tab-content");
+                    panelTab.Attributes.Add("id", "v-pills-tabContent");
+
+
+                foreach (var item in listaHojas)
+                {
+                    String claseInicialTab = esPrimero ? "tab-pane fade show active" : "tab-pane fade"; //  "tab-pane fade show active"
+
+                    Panel panelPane = new Panel();
+
+                    panelPane.Attributes.Add("class", claseInicialTab);
+                    panelPane.Attributes.Add("role", "tabpanel");
+                    panelPane.Attributes.Add("aria-labelledby", "v-pills-" + item.Key.ToString()  + "-tab");
+                    panelPane.ID =  "v-pills-" + item.Key.ToString();
+                    panelPane.ClientIDMode = System.Web.UI.ClientIDMode.Static;
+
+
+                    Button button = new Button();
+                    String claseInicial = esPrimero ? "nav-link active" : "nav-link"; //nav-link active
+
+                    esPrimero = false;
+                    button.Attributes.Add("class", claseInicial);
+                    button.ID = "v-pills-" + item.Key.ToString()+"-tab";
+                    button.ClientIDMode = System.Web.UI.ClientIDMode.Static;
+                    button.Text = item.Value.NombreHoja;
+                    button.UseSubmitBehavior = false;
+                    button.Attributes.Add("data-toggle", "pill");
+                    button.Attributes.Add("data-target", "#" + panelPane.ID);
+                    button.Attributes.Add("role", "tab");
+                    button.Attributes.Add("aria-controls", "v-pills-" + item.Key.ToString());
+                    button.Attributes.Add("aria-selected", "false"); 
+                    button.OnClientClick = "this.disabled = true;";
+                    button.UseSubmitBehavior = false;
+                    button.CommandName = "v-pills-" + item.Key.ToString();
+                    button.CausesValidation = false;
+                    button.Command += new CommandEventHandler(navigation_Click);
+                    panelNav.Controls.Add(button);
+
+                    foreach (var tablaTemp in item.Value.Tablas)
+                    {
+                        panelPane = generarTablaDinamica0(listaTablas[contador], listaBotones[contador], listaBotonesValidar[contador], tabla["Tabla" + tablasAcceso[contador]], true, panelPane);
+                        panelTab.Controls.Add(panelPane);
+                        contador++;
+                    }
+                }
+                panelCol1.Controls.Add(panelNav);
+                panelCol2.Controls.Add(panelTab);
+                panelRow.Controls.Add(panelCol1);
+                panelRow.Controls.Add(panelCol2);
+                ContentPlaceHolder1.Controls.Add(panelRow);
+
+            }
+            else
+            {
+                Panel panel = new Panel();
+                //panelRow.Attributes.Add("class", "row");
+
+                for (int i = 0; i < tablasAcceso.Count; i++)
+                {
+                    panel = generarTablaDinamica0(listaTablas[i], listaBotones[i], listaBotonesValidar[i], tabla["Tabla" + tablasAcceso[i]], false, panel);
+                    Label texto = new Label();
+                    texto.Text = "<br/>" + tabla["Tabla" + tablasAcceso[i]].NombreTabla + "<br/><br/>";
+                    //ContentPlaceHolder1.Controls.Add(texto);
+                    ContentPlaceHolder1.Controls.Add(panel);
+                }
+            }
+
+
         }
 
 
@@ -363,7 +497,9 @@ namespace SistemaIntegralEstadistica
                 "    GROUP_CONCAT( if (campo = '', descripcion, NULL) order by orden ASC  SEPARATOR '|') campoAdicional," +
                 "    GROUP_CONCAT( if (classSuma is not null, classSuma, NULL) order by orden ASC  SEPARATOR '|') sumaColumnas," +
                 "    GROUP_CONCAT( if (classTotal is not null, classTotal, NULL) order by orden ASC  SEPARATOR '|') sumaTotales," +
-                "       GROUP_CONCAT(if(campo <> '', mes, NULL)order by orden ASC  SEPARATOR '|') mes ," +
+                "    GROUP_CONCAT( if (classResta is not null, classResta, NULL) order by orden ASC  SEPARATOR '|') restaColumnas," +
+                "    GROUP_CONCAT( if (classRestaTotal is not null, classRestaTotal, NULL) order by orden ASC  SEPARATOR '|') restaTotales," +
+                "    GROUP_CONCAT(if(campo <> '', mes, NULL)order by orden ASC  SEPARATOR '|') mes ," +
                 " GROUP_CONCAT(If(orden > -1, tipo, NULL) order by orden ASC  SEPARATOR '|') tipoDato " +
                 "     FROM tblcolumnas WHERE      idtabla = " + idTable + " " + mostrarCampos +
                 "    union" +
@@ -375,6 +511,8 @@ namespace SistemaIntegralEstadistica
                 "   GROUP_CONCAT( if (descripcion = '', descripcion, NULL) order by orden ASC  SEPARATOR '|') campoAdicional," +
                 "   GROUP_CONCAT( if (classSuma is not null, classSuma, NULL) order by orden ASC  SEPARATOR '|') sumaColumnasFila," +
                 "   GROUP_CONCAT( if (classTotal is not null, classTotal, NULL) order by orden ASC  SEPARATOR '|') sumaTotalesFila," +
+                "  GROUP_CONCAT( if (classResta is not null, classResta, NULL) order by orden ASC  SEPARATOR '|') restaColumnasFila,"+
+                " GROUP_CONCAT( if (classRestaTotal is not null, classRestaTotal, NULL) order by orden ASC  SEPARATOR '|') restaTotalesFila,"+
                 "    GROUP_CONCAT(If(orden > -1, mes, NULL)  order by orden ASC  SEPARATOR '|') mes , " +
                 "   '' as tipoDato " +
                 "    from tblfilas WHERE idtabla = " + idTable + ") t2 ON t1.id = t2.idtabla" +
@@ -413,6 +551,8 @@ namespace SistemaIntegralEstadistica
                         String[] idColumnas = resultado["campos"].ToString().Split('|');
                         String[] classTotales = resultado["sumaTotales"].ToString().Split('|');
                         String[] clases = resultado["sumaColumnas"].ToString().Split('|');
+                        String[] classRestaTotales = resultado["restaTotales"].ToString().Split('|');
+                        String[] clasesResta = resultado["restaColumnas"].ToString().Split('|');
                         String[] meses = resultado["mes"].ToString().Split('|');
                         String[] tipoDato = resultado["tipoDato"].ToString().Split('|');
 
@@ -443,7 +583,8 @@ namespace SistemaIntegralEstadistica
                                 if (nombresColumnas.Length == clases.Length)
                                 {
                                     columna.NombreClass = clases[i].ToString().Trim();
-
+                                    /*columna.ClaseResta = clasesResta[i].Trim();
+                                    fila.ClaseRestaTotal = classRestaTotales[i].Trim();*/
                                 }
                                 if (esInformacionMensual)
                                 {
@@ -468,6 +609,8 @@ namespace SistemaIntegralEstadistica
                         String[] mesFila = resultado["mes"].ToString().Split('|');
                         String[] classTotales = resultado["sumaTotales"].ToString().Split('|');
                         String[] clases = resultado["sumaColumnas"].ToString().Split('|');
+                        String[] classRestaTotales = resultado["restaTotales"].ToString().Split('|');
+                        String[] clasesResta = resultado["restaColumnas"].ToString().Split('|');
 
                         List<ModeloFila> filas = new List<ModeloFila>();
                         if (idFilas.Length == nombresFilas.Length)
@@ -478,10 +621,13 @@ namespace SistemaIntegralEstadistica
                                 fila.IdFila = Convert.ToInt32(idFilas[i]);
                                 fila.NombreFila = nombresFilas[i];
                                 fila.MesFila = Convert.ToInt32(mesFila[i]);
-                                fila.EsFilaActiva = ( tabla.MesActivo.Equals(mesFila[i]) || mesFila[i].Equals("-1")) ;
+                                fila.EsFilaActiva = ( tabla.MesActivo.Equals(mesFila[i]) || mesFila[i].Equals("-1") || !classTotales[i].Trim().Equals("") || classRestaTotales[i].Trim().Equals("") ) ;
                                 fila.ClaseSuma = clases[i].Trim();
                                 fila.ClaseTotal = classTotales[i].Trim();
-                                
+                                fila.ClaseResta = clasesResta[i].Trim();
+                                fila.ClaseRestaTotal = classRestaTotales[i].Trim();
+
+
                                 filas.Add(fila);
                                 if (!tabla.TieneFilaTrimestre && fila.NombreFila.ToUpper().Contains("TRIMESTRE")) {
                                     tabla.TieneFilaTrimestre = true;
@@ -596,7 +742,7 @@ namespace SistemaIntegralEstadistica
 
 
 
-        protected void generarTablaDinamica0(Table nombreTabla, Button botonGuardar,  Button botonValidar, ModeloTabla tabla)
+        protected Panel generarTablaDinamica0(Table nombreTabla, Button botonGuardar,  Button botonValidar, ModeloTabla tabla, Boolean tieneHojas , Panel panelInfo)
         {
             Dictionary<String, String> datos = new Dictionary<string, string>();
             GridView tablaTemp = new GridView(); ;
@@ -625,6 +771,7 @@ namespace SistemaIntegralEstadistica
                 DataTable table = obtenerDatosAlmacenadosProcedureTemporal(tabla);
                 tablaTemp.ID = "Grid_view_" + tabla.Id;
                 tablaTemp.DataSource = table;
+                tablaTemp.Attributes.Add("class","table");
 
                 //tablaTemp.AutoGenerateEditButton = true;
                 tablaTemp.DataBind();
@@ -758,19 +905,30 @@ namespace SistemaIntegralEstadistica
             }
             finally
             {
+                //Agregar controles
+
+
                 Boolean banderaPanel = false;
                 Panel panelScroll = null;
-                if (tabla.Campos.Count > 20 || tabla.Id == 7) {
+                if (tabla.Campos.Count > 20 || tabla.Id == 7)
+                {
                     banderaPanel = true;
                     panelScroll = new Panel();
                     panelScroll.ID = "Panel_" + tabla.Id;
-                    panelScroll.Attributes.Add("style" , "overflow-x:auto ;width:auto; overflow-y: auto; height: 800px;");
+                    panelScroll.Attributes.Add("style", "overflow-x:auto ;width:auto; overflow-y: auto; height: 600px;");
+                }
+                else
+                {
+                    panelScroll = new Panel();
+                    panelScroll.Attributes.Add("class", "table-responsive");
                 }
                 //Agregar información de tabla al panel
-                if (tabla.TipoTemporal.Equals("2")) {
-                    ContentPlaceHolder1.Controls.Add(tablaTemp);
+                if (tabla.TipoTemporal.Equals("2"))
+                {
+                    panelInfo.Controls.Add(tablaTemp);
                 }
-                else {
+                else
+                {
                     Table nom_tabla = (Table)FindControl(nombreTabla.ID);
                     //botonGuardar = (Button)FindControl(botonGuardar.ID);
                     if (nom_tabla == null)
@@ -780,30 +938,49 @@ namespace SistemaIntegralEstadistica
 
                     Label texto = new Label();
                     texto.Text = "<br/><br/><br/>";
-                    ContentPlaceHolder1.Controls.Add(texto);
+                    panelInfo.Controls.Add(texto);
 
                     Label textoTitulo = new Label();
                     textoTitulo.Text = tabla.NombreTabla;
-                    textoTitulo.Attributes.Add("class", "classTitulo");
+                    textoTitulo.Attributes.Add("class", "h4");
 
-                    ContentPlaceHolder1.Controls.Add(textoTitulo);
-                    if (banderaPanel)
+                    if (!textoTitulo.Text.Trim().Equals(""))
                     {
-                        panelScroll.Controls.Add(nom_tabla);
-                        ContentPlaceHolder1.Controls.Add(panelScroll);
+                        panelInfo.Controls.Add(textoTitulo);
+
+                        Label texto2 = new Label();
+                        texto2.Text = "<br/><br/>";
+                        panelInfo.Controls.Add(texto2);
                     }
-                    else {
-                        ContentPlaceHolder1.Controls.Add(nom_tabla);
-                    }
-                    ContentPlaceHolder1.Controls.Add(botonGuardar);
-                    ContentPlaceHolder1.Controls.Add(botonValidar);
+
+
+                        if (banderaPanel)
+                        {
+                            panelScroll.Controls.Add(nom_tabla);
+                            panelInfo.Controls.Add(panelScroll);
+                        }
+                        else
+                        {
+                            //nom_tabla.Attributes.Add("class", "");
+                            panelScroll.Controls.Add(nom_tabla);
+                            panelInfo.Controls.Add(panelScroll);
+                        }
+                    panelInfo.Controls.Add(botonGuardar);
+                    panelInfo.Controls.Add(botonValidar);
+
+
 
                 }
 
+
+
             }
 
-
+            return panelInfo;
         }
+
+
+
 
         private TableCell activaDesactivaCelda(Table nombreTabla, ModeloTabla tabla, TableCell celda, 
             String idCampo, int i, int j, Dictionary<String, String> datos, int continuoClass, Boolean soloLectura, Boolean esTotMensual) {
@@ -813,29 +990,30 @@ namespace SistemaIntegralEstadistica
             tipoDatoDefault.Add("text","");
             tipoDatoDefault.Add("date", "");
 
+            String keyObject = "";
             try
             {
-                String tipo = tabla.Campos[i].TipoCampo;
+                String tipo = tabla.Campos[i].TipoCampo.Contains("combo") ? "text" : tabla.Campos[i].TipoCampo;
                 bool filaTotalMensual = tabla.Campos[i].NombreCampo.ToUpper().Contains("TOTAL MENSUAL");
-                String keyObject = idCampo + "_" + tabla.Campos[i].IdCampo;
+                keyObject = idCampo + "_" + tabla.Campos[i].IdCampo;
+                String idFila = tabla.Filas[j].IdFila.ToString();
                 String valor = "";
                 String valorBD = (datos.TryGetValue(keyObject, out valor) ? datos[keyObject] : tipoDatoDefault[tipo]);
                 Boolean esCampoActivo = ( tabla.Campos[i].EsActivo && tabla.Filas[j].EsFilaActiva) ;
                 Boolean columnaTotal = tabla.Campos[i].NombreCampo.ToLower().Contains("total");
                 Boolean columnaTotalAnual = tabla.Campos[i].NombreCampo.ToLower().Contains("anual");
                 String claseFila = !tabla.Campos[i].NombreClass.Trim().Equals("") ? idCampo + "_" + tabla.Campos[i].NombreClass : "";
+                String claseColumna = !tabla.Campos[i].NombreClass.Trim().Equals("") ? idFila + "_" + tabla.Campos[i].NombreClass : "";
                 String idElemento = nombreTabla.ID + "_" + idCampo + "_" + tabla.Campos[i].IdCampo;         // ID del control Textbox o Label
                 String nombreClase = nombreTabla.ID + "_" + tabla.Campos[i].IdCampo + "_" + continuoClass;  // Clase que se le dará al control de la fila en caso de tener rowspan
                 var classAdicional = soloLectura && !esTotMensual ? (nombreClase + "_Total") :  (nombreClase + (esTotMensual ? "_Total_Mensual" : "")) ;                  // Clase en la que se tendrá el total, en caso de ser necesario
                 var classAdicionalCol = tabla.Campos[i].ClassTotal.Trim().Equals("") ? " " : idCampo + "_" + tabla.Campos[i].ClassTotal + "_Total";
+                //var classAdicionalColResta = tabla.Campos[i].Trim().Equals("") ? " " : idCampo + "_" + tabla.Campos[i].ClassTotal + "_Total";
                 Boolean columnaTotalMensual = tabla.Campos[i].NombreCampo.ToLower().Contains("total");
 
-
-
-                //Clases para sumar las filas
+                //Clases para sumar o restar las filas
                 String claseFilaSuma = nombreTabla.ID + "_" + tabla.Filas[j].ClaseSuma.Trim() + "_" + tabla.Campos[i].IdCampo  ;
                 String[] claseFilaTotal = tabla.Filas[j].ClaseTotal.Split(',');
-
                 String claseFilaTotalColumna = "";
                 for (int k = 0; k < claseFilaTotal.Length; k++)
                 {
@@ -843,14 +1021,24 @@ namespace SistemaIntegralEstadistica
                 }
                 claseFilaTotalColumna = claseFilaTotalColumna.TrimEnd(',');
 
-
-                if (tipo.StartsWith("combo")) //Agregar datos si es un combo
+                String claseColumnaSuma = nombreTabla.ID + "_" + tabla.Campos[i].NombreClass.Trim() + "_" + tabla.Campos[i].IdCampo;
+                String[] claseColumnaTotal = tabla.Campos[i].ClassTotal.Split(',');
+                String claseColumnaTotalColumna = "";
+                for (int k = 0; k < claseColumnaTotal.Length; k++)
                 {
-                    String[] tipos = tipo.Split('>');
+                    claseColumnaTotalColumna += nombreTabla.ID + "_" + claseColumnaTotal[k] + "_" + tabla.Campos[i].IdCampo + ",";
+                }
+                claseColumnaTotalColumna = claseFilaTotalColumna.TrimEnd(',');
+
+
+                if (tabla.Campos[i].TipoCampo.Contains("combo")) //Agregar datos si es un combo
+                {
+                    String[] tipos = tabla.Campos[i].TipoCampo.Split('>');
                     mapCatalogos = (Dictionary<string, List<ModeloCatalogo>>)Session["listaCatalogos"];
                     List<ModeloCatalogo> listaElementos = mapCatalogos[tipos[1]];
                     DropDownList dl = new DropDownList();
                     dl.ID = idElemento;
+                    dl.Attributes.Add("class", "form-control");
                     dl.DataValueField = "id";
                     dl.DataTextField = "descripcion";
                     dl.DataSource = listaElementos;
@@ -859,11 +1047,14 @@ namespace SistemaIntegralEstadistica
                  }
                     else if ( soloLectura  || esCampoActivo ) // Agregar input en caso de ser un campo activo o una fila de total
                     {
+                        //Agregar clases para sumas
                         String funcion2 = !claseFila.Equals("") ? "; sumarTotales('" + claseFila + "'); " : "";
                         String funcionFila = !claseFilaSuma.Equals("") ? "; sumarTotales('" + claseFilaSuma + "'); " : "";
                         String funcionTotalGeneral = !tabla.Filas[j].ClaseTotal.Trim().Equals("") ? "; sumarTotalesGeneral('" + claseFilaTotalColumna + "', '" + nombreTabla.ID + "_" +  tabla.Campos[i].IdCampo + "_Mensual" + "'); " : "";
 
-                        TextBox tb = (TextBox)FindControl(idElemento);
+                    String funcionSumCol = !claseColumna.Equals("") ? "sumarTotales('" + claseColumna + "');" : "";
+
+                    TextBox tb = (TextBox)FindControl(idElemento);
                         if (tb == null) {
                             tb = new TextBox();
                         }
@@ -874,20 +1065,16 @@ namespace SistemaIntegralEstadistica
                     if (tipo.Contains("number"))
                     {
                         tb.Attributes.Add("min", "0");
-
                     }
                     else if (tipo.Contains("text"))
                     {
-
                     }
                     else if (tipo.Contains("date"))
                     {
                     }
 
 
-                        tb.Attributes.Add("id", idElemento);
-                    //tb.Attributes.Add("class", "form-control " + claseFilaSuma);
-
+                    tb.Attributes.Add("id", idElemento);
                     claseFilaSuma = tabla.Filas[j].ClaseSuma.Trim().Equals("") ? "" : claseFilaSuma;
 
                     if (esTotMensual) {
@@ -896,26 +1083,65 @@ namespace SistemaIntegralEstadistica
                     else if (!claseFilaSuma.Equals(""))
                     {
                         tb.Attributes.Add("class", "form-control " + claseFilaSuma + " " + claseFila + " " + classAdicionalCol);
-                        tb.Attributes.Add("onkeyup", funcionFila + " " + funcionTotalGeneral);
+                        tb.Attributes.Add("onkeyup", funcionFila + " " + funcionTotalGeneral );
+                        tb.Attributes.Add("onchange", funcionFila + " " + funcionTotalGeneral );
                     }
                     else if (claseFilaSuma.Equals("") && !tabla.Filas[j].ClaseTotal.Equals(""))
                     {
                         tb.Attributes.Add("class", "form-control " + nombreTabla.ID.Trim() + "_" + tabla.Filas[j].ClaseTotal + "_" + tabla.Campos[i].IdCampo + "_Total " + claseFila + " " + classAdicionalCol);
                     } 
-                    else if (claseFilaSuma.Equals("")){
+                    else if (claseFilaSuma.Equals("") ){
                         tb.Attributes.Add("class", "form-control " + claseFila + " " + classAdicionalCol);
-                        tb.Attributes.Add("onkeyup", funcion2);
+                        tb.Attributes.Add("onkeyup", funcion2  );
+                        tb.Attributes.Add("onchange", funcion2 );
                     }
 
-                    /*if (!classAdicionalCol.Trim().Equals(""))
+                    String classAd = tb.Attributes["class"];
+                    if (!claseColumnaSuma.Trim().Equals("")) { 
+                        
+                    }
+
+                    //Agregar clases para resta
+                    String claseFilaResta = nombreTabla.ID + "_" + tabla.Filas[j].ClaseResta.Trim() + "_" + tabla.Campos[i].IdCampo;
+                    claseFilaResta = tabla.Filas[j].ClaseResta.Trim().Equals("") ? "" : claseFilaResta;
+                    String[] cadenaTotal = tabla.Filas[j].ClaseRestaTotal.Split('>');
+                    String claseFilaTotalRestaColumna = "";
+                    String campoTotalResta = cadenaTotal.Length > 1 ? cadenaTotal[1] : "";
+                    String[] valoresRestar = cadenaTotal[0].Split('-');
+                    if (cadenaTotal.Length > 1) {
+                        for (int k = 0; k < valoresRestar.Length; k++)
                         {
-                            tb.Attributes.Add("class",  nombreClase + " " + claseFila + " " + classAdicionalCol);
+                            claseFilaTotalRestaColumna +=   nombreTabla.ID + "_" + valoresRestar[k] + "_" + tabla.Campos[i].IdCampo + ",";
                         }
-                        else
-                        {
-                            tb.Attributes.Add("class", "" + classAdicional + " " + classAdicionalCol);
-                            tb.Attributes.Add("onkeyup", "sumarTotales('" + nombreClase + "')"  +  funcionTotalGeneral);
-                        }*/
+                        claseFilaTotalRestaColumna = "" + claseFilaTotalRestaColumna.TrimEnd(',') +"";
+                    }
+
+                    String funcionResta = !claseFilaResta.Equals("") ? " restarTotales('" + claseFilaTotalRestaColumna + "', '" + nombreTabla.ID + "_" + tabla.Campos[i].IdCampo + "_" + campoTotalResta + "' ); " : "";
+                    String claseFilaRestaTotal = !tabla.Filas[j].ClaseRestaTotal.Equals("") ? "; restarTotales('" + claseFilaResta + "'); " : "";
+                    //String funcionTotalGeneralResta = !tabla.Filas[j].ClaseRestaTotal.Trim().Equals("") ? "; restarTotalesGeneral('" + claseFilaTotalRestaColumna + "', '" + nombreTabla.ID + "_" + tabla.Campos[i].IdCampo + "_Mensual" + "'); " : "";
+
+                    classAd = tb.Attributes["class"];
+
+                    if (!claseFilaResta.Equals(""))
+                    {
+                        tb.Attributes.Add("class", classAd + " " + claseFilaResta );
+                        tb.Attributes.Add("onkeyup", tb.Attributes["onkeyup"] + " " + funcionResta );
+                        tb.Attributes.Add("onchange", tb.Attributes["onchange"] + " " + funcionResta );
+                    }
+                    else if (claseFilaResta.Equals("") && !tabla.Filas[j].ClaseRestaTotal.Equals(""))
+                    {
+                        tb.Attributes.Add("class", tb.Attributes["class"] + " " + nombreTabla.ID.Trim() + "_" + tabla.Campos[i].IdCampo + "_" + tabla.Filas[j].ClaseRestaTotal +" " + classAdicionalCol);
+                    }
+                    else if (claseFilaResta.Equals(""))
+                    {
+                        tb.Attributes.Add("class", tb.Attributes["class"]+ " " + claseFila + " " + classAdicionalCol);
+                        tb.Attributes.Add("onkeyup" , tb.Attributes["onkeyup"]  + " " + funcionResta);
+                        tb.Attributes.Add("onchange", tb.Attributes["onchange"] + " " + funcionResta);
+                    }
+
+                    if ( (!tabla.Filas[j].ClaseRestaTotal.Equals("") && !tabla.Filas[j].ClaseRestaTotal.Contains(">")) || !tabla.Filas[j].ClaseTotal.Equals("")  ) {
+                        soloLectura  =  true;
+                    }
 
                     if (soloLectura || columnaTotalMensual)
                         {
@@ -948,6 +1174,141 @@ namespace SistemaIntegralEstadistica
 
     return celda;
 }
+
+
+
+
+        private TableCell activaDesactivaCelda2(Table nombreTabla, ModeloTabla tabla, TableCell celda,
+            String idCampo, int i, int j, Dictionary<String, String> datos, int continuoClass, Boolean soloLectura, Boolean esTotMensual)
+        {
+            Console.WriteLine("Agregar información");
+            Dictionary<String, String> tipoDatoDefault = new Dictionary<string, string>();
+            tipoDatoDefault.Add("number", "0");
+            tipoDatoDefault.Add("text", "");
+            tipoDatoDefault.Add("date", "");
+            String idElemento = nombreTabla.ID + "_" + idCampo + "_" + tabla.Campos[i].IdCampo;         // ID del control Textbox o Label
+            String valor = "";
+            String keyObject = "";
+            String valorBD = "";
+            try
+            {
+                Boolean esCampoActivo = (tabla.Campos[i].EsActivo && tabla.Filas[j].EsFilaActiva);
+                Boolean esCampoResultadoFormula = (!tabla.Campos[i].ClassTotal.Trim().Equals("") || (!tabla.Filas[j].ClaseRestaTotal.Equals("") && !tabla.Filas[j].ClaseRestaTotal.Contains(">")) || !tabla.Filas[j].ClaseTotal.Equals("")); // Verificar si es una columna que tendrá reultado de "FORMULA" (suma o resta)
+
+                if (tabla.Campos[i].TipoCampo.Contains("combo")) //Agregar datos si es un combo
+                {
+                    String[] tipos = tabla.Campos[i].TipoCampo.Split('>');
+                    mapCatalogos = (Dictionary<string, List<ModeloCatalogo>>)Session["listaCatalogos"];
+                    List<ModeloCatalogo> listaElementos = mapCatalogos[tipos[1]];
+                    DropDownList dl = new DropDownList();
+                    dl.ID = idElemento;
+                    dl.Attributes.Add("class", "form-control");
+                    dl.DataValueField = "id";
+                    dl.DataTextField = "descripcion";
+                    dl.DataSource = listaElementos;
+                    dl.DataBind();
+                    celda.Controls.Add(dl);
+
+                }
+                else if (esCampoResultadoFormula || esCampoActivo) // Agregar input en caso de ser un campo activo o una fila de total
+                {
+                    keyObject = idCampo + "_" + tabla.Campos[i].IdCampo;
+                    String tipo = tabla.Campos[i].TipoCampo.Contains("combo") ? "text" : tabla.Campos[i].TipoCampo; //Tipo de dato del campo
+                    valorBD = (datos.TryGetValue(keyObject, out valor) ? datos[keyObject] : tipoDatoDefault[tipo]); //Valor del campo almacenado en base de datos
+
+                    String claseFila = !tabla.Campos[i].NombreClass.Trim().Equals("") ? idCampo + "_" + tabla.Campos[i].NombreClass : "";
+                    String claseColumna = !tabla.Campos[i].NombreClass.Trim().Equals("") ? tabla.Filas[j].IdFila + "_" + tabla.Campos[i].NombreClass : "";
+
+                    //Agregar clases para sumas
+                    String claseSumaFila = nombreTabla.ID + "_" + tabla.Filas[j].ClaseSuma.Trim() + "_" + tabla.Campos[i].IdCampo;
+                    String claseSumaColumna = nombreTabla.ID + "_" + tabla.Campos[i].NombreClass.Trim() + "_" + tabla.Filas[j].IdFila;
+
+                    //Agregar clases para resta
+                    String claseFilaResta = nombreTabla.ID + "_" + tabla.Filas[j].ClaseResta.Trim() + "_" + tabla.Campos[i].IdCampo;
+
+                    //Clases para sumar o restar filas/columnas
+                    String claseFilaTotalColumna = generaFuncionesSumaResta(nombreTabla.ID, tabla.Filas[j].ClaseTotal.Split(','), tabla.Campos[i].IdCampo, "suma");
+                    String claseColumnaTotalColumna = generaFuncionesSumaResta(nombreTabla.ID, tabla.Campos[i].ClassTotal.Split(','), tabla.Campos[i].IdCampo, "suma");
+                    String claseFilaTotalRestaColumna = generaFuncionesSumaResta(nombreTabla.ID, tabla.Filas[j].ClaseRestaTotal.Split('>'), tabla.Campos[i].IdCampo, "resta");
+
+
+                    TextBox tb = (TextBox)FindControl(idElemento);
+                    if (tb == null) { tb = new TextBox(); }
+                    tb.ID = idElemento;
+                    tb.Text = valorBD;
+                    tb.Attributes.Add("Type", tipo);
+
+                    if (tipo.Contains("number"))
+                    {tb.Attributes.Add("min", "0");}else if (tipo.Contains("text")){ }else if (tipo.Contains("date")){ }
+
+
+                    //Agregar FUNCIONES para sumar y restar
+                    String funcionFila = !claseSumaFila.Equals("") ? "; sumarTotales('" + claseSumaFila + "'); " : "";
+                    String funcionTotalGeneralPorFila = !tabla.Filas[j].ClaseTotal.Trim().Equals("") ? "; sumarTotalesGeneral('" + claseFilaTotalColumna + "', '" + nombreTabla.ID + "_" + tabla.Campos[i].IdCampo + "_Mensual" + "'); " : "";
+
+                    String funcionSumCol = !claseColumna.Equals("") ? "sumarTotales('" + claseColumna + "');" : "";
+
+                }
+                else { }
+            }
+            catch (Exception error)
+            {
+
+                Console.WriteLine("ERROR AL ACTIVAR O DESACTIVAR CELDA: " + error.Message);
+            }
+
+            return celda;
+        }
+
+
+        private String  generaFuncionesSumaResta(String tabla, String[] val , String campo, String tipo) {
+            String claseTotal = "";
+            try
+            {
+                if (tipo.Equals("suma")) {
+                    String[] claseFilaTotal = val;
+                    claseTotal = "";
+                    for (int k = 0; k < claseFilaTotal.Length; k++)
+                    {
+                        claseTotal += tabla + "_" + claseFilaTotal[k] + "_" + campo + ",";
+                    }
+                    claseTotal = claseTotal.TrimEnd(',');
+                } else if (tipo.Equals("resta")) {
+                    String[] cadenaTotal = val;
+                    String campoTotalResta = cadenaTotal.Length > 1 ? cadenaTotal[1] : "";
+                    String[] valoresRestar = cadenaTotal[0].Split('-');
+                    if (cadenaTotal.Length > 1)
+                    {
+                        for (int k = 0; k < valoresRestar.Length; k++)
+                        {
+                            claseTotal += tabla + "_" + valoresRestar[k] + "_" + campo + ",";
+                        }
+                        claseTotal = "" + claseTotal.TrimEnd(',') + "";
+                    }
+                }
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine("Error al obtener información " + exc.ToString());
+            }
+
+            return claseTotal;
+        }
+
+        private TextBox agregarPropiedad(TextBox input, String atributo, String valor) {
+            try
+            {
+                String valorIni = input.Attributes[atributo];
+                input.Attributes.Add(atributo , (valorIni + " "+ valor).Trim() );
+            }
+            catch (Exception exc)
+            {
+
+                Console.WriteLine("");
+            }
+
+            return input;
+        }
 
 
 
@@ -1378,6 +1739,8 @@ namespace SistemaIntegralEstadistica
             finally
             {
                 Console.WriteLine("Cargar controles");
+                ContentPlaceHolder1.Controls.Clear();
+                GeneraControlesDinamicos();
             }
 
         }
@@ -1459,6 +1822,38 @@ namespace SistemaIntegralEstadistica
                 //CargarControles();
             }
 
+        }
+
+        public void navigation_Click(object sender, CommandEventArgs e) {
+            //Console.WriteLine(e.CommandName.ToString() );
+            String idPanelActualiza = e.CommandName.ToString();
+
+            try
+            {
+                Dictionary<int, ModeloHoja> listaHojas = (Dictionary<int, ModeloHoja>)Session["verHojas"];
+                foreach (var item in listaHojas)
+                {
+                    String id = "v-pills-" + item.Key.ToString();
+                    String idTab = "v-pills-" + item.Key.ToString() + "-tab";
+                    Panel panel = (Panel)ContentPlaceHolder1.FindControl(id);
+                    Button buttonTab = (Button)ContentPlaceHolder1.FindControl(idTab);
+                    if (idPanelActualiza.Equals(id))
+                    {
+                        panel.Attributes.Add("class", "tab-pane fade show active");
+                        buttonTab.Attributes.Add("class", "nav-link active");
+                    }
+                    else
+                    {
+                        panel.Attributes.Add("class", "tab-pane fade");
+                        buttonTab.Attributes.Add("class", "nav-link");
+                    }
+                }
+
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine("Error al actualizar:"+exc.ToString());
+            }
         }
 
 

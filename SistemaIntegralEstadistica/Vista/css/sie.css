@@ -29,10 +29,52 @@ display:  contents!important;
 
 .fijar-r2 {
     position: sticky;
-    top: 50px;
+    top: 31px;
 }
 
 .fijar-col1 {
     position: sticky;
     left: 0;
+}
+
+table {
+   font-size: 12px!important;
+}
+
+.table td, .table th {
+    padding: 0.35rem!important;
+}
+table > tbody > tr > td .form-control {
+       /* min-width: 50px !important;*/
+        max-width: 70px!important;
+}
+
+#ContentPlaceHolder1_Panel_8 > table > tbody > tr > td .form-control {
+    min-width: 120px !important;
+    max-width: 120px !important;
+}
+
+#ContentPlaceHolder1_Panel_7 > table > tbody > tr > td .form-control {
+    min-width: 80px !important;
+    max-width: 80px !important;
+}
+.form-control {
+    font-size: 0.7rem!important;
+}
+
+.ColumnaOculta {
+    display: none;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    /*    color: #fff;*/
+    background-color: #b71c1c!important;
+}
+
+#v-pills-tab {
+    padding-top: 10em;
+}
+
+#v-pills-tab {
+    position:fixed;
 }
