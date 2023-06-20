@@ -108,3 +108,49 @@ header {
     font-size: 20px;
     font-variant: small-caps;
 }
+
+.﻿sesion_login_contenedor2 {
+    min-height: 800px !important;
+}
+
+.central_panel2 {
+    padding: 15px;
+    height: 900px !important;
+    /* transform: translate(-50%, -50%);*/
+}
+.imagen2 {
+    background-image: url("../Img/portadasistema.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 1px solid #E1E1E1;
+    border-radius: 4px;
+}
+.contenedor_completo2 {
+    width: 330px;
+    padding: 15px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-60%, -0%);
+}
+
+.titulo_central_panel2 {
+    /*width: 900px; */
+    font-size: 30px;
+    width: 330px;
+    padding: 15px;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-60%, 80%);
+}
+
+.titulo_login_panel2 {
+    font-size: 20px;
+    font-variant: small-caps;
+}
+
+
+
+
+

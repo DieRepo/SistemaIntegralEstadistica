@@ -21,54 +21,51 @@
      <script src="PNotify/pnotify.custom.min.js"></script>
 </head>
 <body>
-        <form runat="server" class="login_contenedor d-flex align-items-center justify-content-center">
-        <asp:ScriptManager ID="ajax_login" runat="server"/>
-        <asp:UpdatePanel runat="server">
-            <ContentTemplate>
-                <asp:Panel runat="server" CssClass="central_panel p-4">
+ <form runat="server">
 
-                    <asp:Panel runat="server" CssClass="row m-0">
-                        <asp:Label runat="server" CssClass="titulo_central_panel text-center font-weight-bold" style="margin: 0 auto;"> SISTEMA INTEGRAL DE ESTADISTICA</asp:Label>
-                    </asp:Panel>
-                    <asp:Panel runat="server" CssClass="row m-0">
-                        <asp:Panel runat="server" CssClass="col-sm-6 p-3 d-flex align-items-center justify-content-center">
-                           <%-- --%> <asp:Image runat="server" ImageUrl="~/Vista/Img/pjem.png" /> 
+          <asp:Panel runat="server" CssClass="﻿sesion_login_contenedor">
+              
+              <asp:ScriptManager ID="ajax_login" runat="server"/>
+                                
+               <asp:Panel runat="server" CssClass="central_panel">
+                   <asp:Panel runat="server" CssClass="">
+                            <asp:Image runat="server" ImageUrl="Img/portada1-01.png" style="height: 650px; border: 1px solid;border-radius: 5px;position: absolute;top: 50%;left: 50%;transform: translate(-40%, -50%);"/>
                         </asp:Panel>
-                        <asp:Panel runat="server" CssClass="col-sm-6 p-3">
-                            <asp:Panel runat="server" CssClass="d-flex align-items-center justify-content-center">
-                                <asp:Label runat="server" CssClass="titulo_login_panel text-center font-weight-bold p-2">Bienvenido</asp:Label>
-                            </asp:Panel>
-                            <asp:Panel runat="server" CssClass="form-group">
-                                <asp:Label runat="server" CssClass="">Usuario</asp:Label>
-                                <asp:Panel runat="server" CssClass="input-group">
-                                    <asp:Panel runat="server" CssClass="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-user-tie"></i>
-                                        </span>
+                            <asp:Panel runat="server" CssClass="">
+                              <asp:Label runat="server" CssClass="titulo_central_panel font-weight-bold">SISTEMA INTEGRAL DE ESTADISTICA</asp:Label>
+                                 </asp:Panel>
+                      </asp:Panel>
+                               <asp:Panel runat="server" CssClass="contenedor_completo"> 
+                                       <asp:Panel runat="server" CssClass="form-group">
+                                            <asp:Label runat="server" CssClass="">Usuario</asp:Label>
+                                            <asp:Panel runat="server" CssClass="input-group">
+                                                <asp:Panel runat="server" CssClass="input-group-prepend">
+                                                    <span class="input-group-text">
+                                                        <i class="fas fa-user-tie"></i>
+                                                    </span>
+                                                </asp:Panel>
+                                                <asp:TextBox ID="TextBox_user_name" runat="server" CssClass="form-control" Placeholder="Usuario"/>
+                                            </asp:Panel>
+                                        </asp:Panel>
+                                        <asp:Panel runat="server" CssClass="form-group">
+                                            <asp:Label runat="server" CssClass="">Contraseña</asp:Label>
+                                            <asp:Panel runat="server" CssClass="input-group">
+                                                <asp:Panel runat="server" CssClass="input-group-prepend">
+                                                    <asp:Label runat="server" CssClass="input-group-text"><i class="fas fa-lock"></i></asp:Label>
+                                                </asp:Panel>
+                                                <asp:TextBox TextMode="Password" ID="TextBox_password" runat="server" CssClass="form-control" Placeholder="Contraseña"/>
+                                            </asp:Panel>
+                                        </asp:Panel>
+                                        <asp:Panel runat="server" CssClass="form-group d-flex align-items-center justify-content-center">
+                                            <asp:Button runat="server" ID="btn_login" Text="Iniciar sesión" CssClass="btn btn-secondary" OnClick="btn_login_Click"/>
+                                        </asp:Panel>  
+                                        <asp:Panel runat="server" CssClass="form-group d-flex align-items-center justify-content-center">
+                                            <asp:Label runat="server" ID="textoError" CssClass=""></asp:Label>
+                                        </asp:Panel>  
                                     </asp:Panel>
-                                    <asp:TextBox ID="TextBox_user_name" runat="server" CssClass="form-control" Placeholder="Usuario"/>
-                                </asp:Panel>
-                            </asp:Panel>
-                            <asp:Panel runat="server" CssClass="form-group">
-                                <asp:Label runat="server" CssClass="">Contraseña</asp:Label>
-                                <asp:Panel runat="server" CssClass="input-group">
-                                    <asp:Panel runat="server" CssClass="input-group-prepend">
-                                        <asp:Label runat="server" CssClass="input-group-text"><i class="fas fa-lock"></i></asp:Label>
-                                    </asp:Panel>
-                                    <asp:TextBox TextMode="Password" ID="TextBox_password" runat="server" CssClass="form-control" Placeholder="Contraseña"/>
-                                </asp:Panel>
-                            </asp:Panel>
-                            <asp:Panel runat="server" CssClass="form-group d-flex align-items-center justify-content-center">
-                                <asp:Button runat="server" ID="btn_login" Text="Iniciar sesión" CssClass="btn btn-secondary" OnClick="btn_login_Click"/>
-                            </asp:Panel>  
-                            <asp:Panel runat="server" CssClass="form-group d-flex align-items-center justify-content-center">
-                                <asp:Label runat="server" ID="textoError" CssClass=""></asp:Label>
-                            </asp:Panel>  
-                        </asp:Panel>
-                    </asp:Panel>
-                </asp:Panel>
-            </ContentTemplate>
-        </asp:UpdatePanel>
+               
+                     </asp:Panel>
+           
     </form>
 </body>
 </html>
