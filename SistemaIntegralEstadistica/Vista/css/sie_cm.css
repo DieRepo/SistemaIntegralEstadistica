@@ -7,14 +7,13 @@
     vertical-align: middle !important;
 }
 
-#botones-left > .btn > .fa{
-display:  contents!important;
-
+#botones-left > .btn > .fa {
+    display: contents !important;
 }
 
 #header > .row {
-    margin-right: 0px!important;
-    margin-left: 0px!important;
+    margin-right: 0px !important;
+    margin-left: 0px !important;
 }
 
 .btn-orange {
@@ -22,7 +21,7 @@ display:  contents!important;
     border-color: #ef6c00 !important;
 }
 
-.fijar-r1{
+.fijar-r1 {
     position: sticky;
     top: 0;
 }
@@ -38,15 +37,16 @@ display:  contents!important;
 }
 
 table {
-   font-size: 12px!important;
+    font-size: 12px !important;
 }
 
 .table td, .table th {
-    padding: 0.35rem!important;
+    padding: 0.35rem !important;
 }
+
 table > tbody > tr > td .form-control {
-       /* min-width: 50px !important;*/
-     /*   max-width: 70px!important; */
+    /* min-width: 50px !important;*/
+    /*   max-width: 70px!important; */
 }
 
 #ContentPlaceHolder1_Panel_8 > table > tbody > tr > td .form-control {
@@ -58,8 +58,9 @@ table > tbody > tr > td .form-control {
     min-width: 80px !important;
     max-width: 80px !important;
 }
+
 .form-control {
-    font-size: 0.7rem!important;
+    font-size: 0.7rem !important;
 }
 
 .ColumnaOculta {
@@ -68,19 +69,21 @@ table > tbody > tr > td .form-control {
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     /*    color: #fff;*/
-    background-color: #b71c1c!important;
+    background-color: #b71c1c !important;
 }
 
 #v-pills-tab {
-/*    padding-top: 10em;
-*/}
+    /*    padding-top: 10em;
+*/
+}
 
 #v-pills-tab {
-/*    position:fixed;
-*/}
+    /*    position:fixed;
+*/
+}
 
 .nav > input {
-    max-width: 200px!important;
+    max-width: 200px !important;
 }
 
 #menuGeneric_sie {
@@ -99,19 +102,25 @@ table > tbody > tr > td .form-control {
 
 
 table tbody tr:first-child {
-    /*background: #d32f2f!important;
-    color:white;*/
+    background: #d32f2f!important;
+    color:white;
+}
+
+
+.modal-body > table tbody tr:first-child {
+    background: white !important;
+    color: white;
 }
 
 .nav-pills > input {
-    margin-left: 5px!important;
-    margin-bottom: 3px!important;
+    margin-left: 5px !important;
+    margin-bottom: 3px !important;
 }
 
 .clase-scroll-250 {
     overflow: auto;
-    height: 250px!important;
-    margin-top: 15px!important;
+    height: 250px !important;
+    margin-top: 15px !important;
 }
 
 
@@ -120,6 +129,6 @@ table tbody tr:first-child {
     color: white;
 }
 
-
-
-
+body {
+    padding-right: 0px!important;
+}

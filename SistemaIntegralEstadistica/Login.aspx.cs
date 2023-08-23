@@ -16,6 +16,11 @@ namespace SistemaIntegralEstadistica
         protected void Page_Load(object sender, EventArgs e)
         {
             textoError.Visible = false;
+            if (!this.IsPostBack) {
+                Session.RemoveAll();
+                Session.Clear();
+                Session.Abandon();
+            }
         }
 
         protected void btn_login_Click(object sender, EventArgs e)
@@ -69,47 +74,58 @@ namespace SistemaIntegralEstadistica
                         
                         idArea = r.GetString("idArea");
                         nombreArea = r.GetString("nombreArea");
+                        try
+                        {
+                            idpermisostablas = r.GetInt32("idtablacceso");
 
-                        idpermisostablas = r.GetInt32("idtablacceso");
+                            int idHoja = r.GetInt32("idHoja");
 
-                        int idHoja = r.GetInt32("idHoja");
-
-                        ModeloHoja value;
-                        bool hasValue = hojas.TryGetValue(idHoja, out value);
-                        if (idHoja > 0) {
-                            if (hasValue)
+                            ModeloHoja value;
+                            bool hasValue = hojas.TryGetValue(idHoja, out value);
+                            if (idHoja > 0)
                             {
-                                ModeloHoja val = hojas[idHoja];
-                                ModeloTabla tab = new ModeloTabla();
-                                tab.Id = idpermisostablas;
-                                if (val.Tablas == null)
+                                if (hasValue)
                                 {
-                                    val.Tablas = new List<ModeloTabla>();
-                                    val.Tablas.Add(tab);
+                                    ModeloHoja val = hojas[idHoja];
+                                    ModeloTabla tab = new ModeloTabla();
+                                    tab.Id = idpermisostablas;
+                                    if (val.Tablas == null)
+                                    {
+                                        val.Tablas = new List<ModeloTabla>();
+                                        val.Tablas.Add(tab);
+                                    }
+                                    else
+                                    {
+                                        val.Tablas.Add(tab);
+                                    }
                                 }
                                 else
                                 {
-                                    val.Tablas.Add(tab);
+                                    ModeloHoja hoja = new ModeloHoja();
+                                    hoja.IdHoja = r.GetInt32("idHoja");
+                                    hoja.NombreHoja = r.GetString("descripcion");
+                                    hoja.Orden = r.GetInt32("ordenHoja");
+                                    //ModeloHoja val = hojas[idHoja];
+                                    List<ModeloTabla> lista = new List<ModeloTabla>();
+                                    ModeloTabla tab = new ModeloTabla();
+                                    tab.Id = idpermisostablas;
+                                    hoja.Tablas = new List<ModeloTabla>();
+                                    hoja.Tablas.Add(tab);
+                                    hojas.Add(idHoja, hoja);
                                 }
                             }
-                            else
-                            {
-                                ModeloHoja hoja = new ModeloHoja();
-                                hoja.IdHoja = r.GetInt32("idHoja");
-                                hoja.NombreHoja = r.GetString("descripcion");
-                                hoja.Orden = r.GetInt32("ordenHoja");
-                                //ModeloHoja val = hojas[idHoja];
-                                List<ModeloTabla> lista = new List<ModeloTabla>();
-                                ModeloTabla tab = new ModeloTabla();
-                                tab.Id = idpermisostablas;
-                                hoja.Tablas = new List<ModeloTabla>();
-                                hoja.Tablas.Add(tab);
-                                hojas.Add(idHoja, hoja);
-                            }
+
+
+                            idtablas.Add(idpermisostablas);
+
+                        }
+                        catch (Exception excep)
+                        {
+
+                            Console.WriteLine(excep.ToString());
                         }
 
-
-                        idtablas.Add(idpermisostablas);
+                        
                     }
                     Session["verHojas"] = hojas;
                     Session["verTabla"] = idtablas;
@@ -126,9 +142,9 @@ namespace SistemaIntegralEstadistica
 
                     Session["usuario"] = uss;
                     
-                    if (id.Equals(-1))
+                    if (idArea.Equals("5"))
                     {
-                        Response.Redirect("~/Mediacion/Mediacion.aspx");
+                        Response.Redirect("~/Vista/CiudadMujeres.aspx");
                     }
                     else {
                         Response.Redirect("~/Vista/Inicio.aspx");
@@ -150,8 +166,6 @@ namespace SistemaIntegralEstadistica
             }
             catch (Exception ex)
             {
-
-
                 Console.WriteLine(ex.ToString());
                 textoError.Visible = true;
                 textoError.Text = "Usuario o contraseña incorrectos";

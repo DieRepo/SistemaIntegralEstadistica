@@ -9,7 +9,7 @@
   <%--CSS--%>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"  />
-    <link rel="stylesheet" href="Css/Login.css" />
+    <link rel="stylesheet" href="../Vista/css/Login.css" />
     <link rel="stylesheet" href="PNotify/animate.css" />
     <link rel="stylesheet" href="PNotify/pnotify.custom.min.css" />
 
@@ -21,21 +21,21 @@
      <script src="PNotify/pnotify.custom.min.js"></script>
 </head>
 <body>
- <form runat="server">
+   <form runat="server">
 
-          <asp:Panel runat="server" CssClass="﻿sesion_login_contenedor">
+          <asp:Panel runat="server" CssClass="﻿sesion_login_contenedor2">
               
               <asp:ScriptManager ID="ajax_login" runat="server"/>
                                 
-               <asp:Panel runat="server" CssClass="central_panel">
+               <asp:Panel runat="server" CssClass="central_panel2">
                    <asp:Panel runat="server" CssClass="">
-                            <asp:Image runat="server" ImageUrl="Img/portada1-01.png" style="height: 650px; border: 1px solid;border-radius: 5px;position: absolute;top: 50%;left: 50%;transform: translate(-40%, -50%);"/>
+                            <asp:Image runat="server" ImageUrl="../Vista/Img/portada1-01.png" style="height: 650px; border: 1px solid;border-radius: 5px;position: absolute;top: 50%;left: 50%;transform: translate(-40%, -50%);"/>
                         </asp:Panel>
                             <asp:Panel runat="server" CssClass="">
-                              <asp:Label runat="server" CssClass="titulo_central_panel font-weight-bold">SISTEMA INTEGRAL DE ESTADISTICA</asp:Label>
+                              <asp:Label runat="server" CssClass="titulo_central_panel2 font-weight-bold">SISTEMA INTEGRAL DE ESTADISTICA</asp:Label>
                                  </asp:Panel>
                       </asp:Panel>
-                               <asp:Panel runat="server" CssClass="contenedor_completo"> 
+                               <asp:Panel runat="server" CssClass="contenedor_completo2"> 
                                        <asp:Panel runat="server" CssClass="form-group">
                                             <asp:Label runat="server" CssClass="">Usuario</asp:Label>
                                             <asp:Panel runat="server" CssClass="input-group">
@@ -65,7 +65,10 @@
                                     </asp:Panel>
                
                      </asp:Panel>
-           
-    </form>
+          
+         </form>
+
+
+
 </body>
 </html>

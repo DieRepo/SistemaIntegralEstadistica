@@ -107,7 +107,7 @@
                             <i class="fa fa-download fa-2x" aria-hidden="true" ></i> 
                         </asp:LinkButton>
 
-                         <asp:LinkButton runat="server" ID="LinkButton1" title="Cerrar sesión" Text="Cerrar sesión"
+                         <asp:LinkButton runat="server" ID="LinkButton1" title="Cerrar sesión" Text="Cerrar sesión" 
                         Font-Size="20px" OnClick="btnCerrarSesion_Click" CausesValidation="false" Visible="true" Style="font-size: 16px;" class="btn btn-dark ">
                             <i class="fa fa-sign-out fa-2x" aria-hidden="true" ></i> 
                         </asp:LinkButton>

@@ -5,6 +5,7 @@ using System.Web;
 
 namespace SistemaIntegralEstadistica.Controlador
 {
+    [Serializable]
     public class ModeloCampo
     {
         private String idCampo;

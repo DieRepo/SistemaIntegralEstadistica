@@ -101,7 +101,8 @@
     <Content Include="css\font-awesome.css" />
     <Content Include="css\font-awesome.min.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
-    <Content Include="Vista\CuidadMujeres.aspx" />
+    <Content Include="Vista\CiudadMujeres.aspx" />
+    <Content Include="Vista\css\sie_cm.css" />
     <Content Include="Vista\Img\cerrar.png" />
     <Content Include="Vista\Img\close.png" />
     <Content Include="Vista\Img\Logo_200x60.png" />
@@ -110,6 +111,8 @@
     <Content Include="Vista\css\login.css" />
     <Content Include="Vista\css\Menu.css" />
     <Content Include="Vista\css\sie.css" />
+    <Content Include="Vista\Img\portada1-01.png" />
+    <Content Include="Vista\Img\portadasistema.png" />
     <Content Include="Vista\Inicio.aspx" />
     <Content Include="Vista\js\bootstrap.bundle.js" />
     <Content Include="Vista\js\bootstrap.bundle.min.js" />
@@ -153,6 +156,7 @@
     <Compile Include="Master1.Master.designer.cs">
       <DependentUpon>Master1.Master</DependentUpon>
     </Compile>
+    <Compile Include="Modelo\ModeloMediacion.cs" />
     <Compile Include="Modelo\ModeloCampo.cs" />
     <Compile Include="Modelo\ModeloCatalogo.cs" />
     <Compile Include="Modelo\ModeloHoja.cs" />
@@ -160,6 +164,7 @@
     <Compile Include="Modelo\ModeloFila.cs" />
     <Compile Include="Modelo\ModeloInicio.cs" />
     <Compile Include="Modelo\ModeloTabla.cs" />
+    <Compile Include="Modelo\ModeloTablaReporte.cs" />
     <Compile Include="obj\Debug\.NETFramework,Version=v4.5.AssemblyAttributes.cs" />
     <Compile Include="PaginaMaestra.Master.cs">
       <DependentUpon>PaginaMaestra.Master</DependentUpon>
@@ -169,12 +174,12 @@
       <DependentUpon>PaginaMaestra.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Vista\CuidadMujeres.aspx.cs">
-      <DependentUpon>CuidadMujeres.aspx</DependentUpon>
+    <Compile Include="Vista\CiudadMujeres.aspx.cs">
+      <DependentUpon>CiudadMujeres.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Vista\CuidadMujeres.aspx.designer.cs">
-      <DependentUpon>CuidadMujeres.aspx</DependentUpon>
+    <Compile Include="Vista\CiudadMujeres.aspx.designer.cs">
+      <DependentUpon>CiudadMujeres.aspx</DependentUpon>
     </Compile>
     <Compile Include="Vista\Inicio.aspx.cs">
       <DependentUpon>Inicio.aspx</DependentUpon>

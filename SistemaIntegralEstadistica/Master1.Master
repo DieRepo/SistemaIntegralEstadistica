@@ -6,7 +6,7 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
-    <link rel="stylesheet" href="Vista/css/sie.css" />
+    <link rel="stylesheet" href="Vista/css/sie_cm.css" />
     <link rel="stylesheet" href="Vista/css/Menu.css" />
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -90,7 +90,7 @@
                     </div>
 
                     <%--Información del año de consulta--%>
-                    <div class="col col-4" style="text-align:center;">
+                    <div class="col col-4" style="text-align:center;visibility:hidden;">
                         <asp:Label runat="server" Text="Año: "></asp:Label>
                             <asp:DropDownList runat="server" ID="AnioConsulta"  class="form-control" aria-labelledby="dropdownMenuButton"
                                 style="width: 40%!important;display:initial;">
@@ -102,13 +102,10 @@
 
                     <%--Información de descarga y cierre--%>
                     <div id="botones-left" class="col col-4" style="text-align:end;">
-                        <asp:Button ID="ButtonDownload" Visible="false" runat="server" Text="<i class='fa fa-download' aria-hidden='true' ></i> " class="btn btn-secondary"/>
 
-                        <asp:LinkButton runat="server" id="btnRun2" class="btn btn-info btn-orange" title="Descargar excel"  >
-                            <i class="fa fa-download fa-2x" aria-hidden="true" ></i> 
-                        </asp:LinkButton>
+                        
 
-                         <asp:LinkButton runat="server" ID="LinkButton1" title="Cerrar sesión" Text="Cerrar sesión"
+                         <asp:LinkButton runat="server" ID="LinkButton1" title="Cerrar sesión" Text="Cerrar sesión" OnClick="btnCerrarSesion_Click"
                         Font-Size="20px" CausesValidation="false" Visible="true" Style="font-size: 16px;" class="btn btn-dark ">
                             <i class="fa fa-sign-out fa-2x" aria-hidden="true" ></i> 
                         </asp:LinkButton>

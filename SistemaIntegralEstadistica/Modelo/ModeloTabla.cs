@@ -5,7 +5,8 @@ using System.Web;
 
 namespace SistemaIntegralEstadistica.Controlador
 {
-    public class ModeloTabla
+    [Serializable]
+    public class ModeloTabla 
     {
         private int id;
         private String idTabla;

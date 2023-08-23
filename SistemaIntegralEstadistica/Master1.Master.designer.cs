@@ -78,24 +78,6 @@ namespace SistemaIntegralEstadistica
         protected global::System.Web.UI.WebControls.DropDownList AnioConsulta;
 
         /// <summary>
-        /// Control ButtonDownload.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonDownload;
-
-        /// <summary>
-        /// Control btnRun2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnRun2;
-
-        /// <summary>
         /// Control LinkButton1.
         /// </summary>
         /// <remarks>
